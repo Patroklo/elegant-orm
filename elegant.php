@@ -45,13 +45,17 @@ class Elegant {
 
 }
 
-spl_autoload_register(function($class){
-	if(strpos($class, "Elegant\\") === 0)
-	{
-		$classname = str_replace("Elegant\\", "", $class);
 
-		$path = 'src/' . strtolower( str_replace("\\", "/", $classname) ) . EXT;
-		require_once $path;
+	function register_class($class)
+	{
+		if(strpos($class, "Elegant\\") === 0)
+		{
+			$classname = str_replace("Elegant\\", "", $class);
+	
+			$path = 'src/' . strtolower( str_replace("\\", "/", $classname) ) . EXT;
+			require_once $path;
+		}
 	}
 
-});
+
+	spl_autoload_register('register_class');
